@@ -7,16 +7,7 @@ USER root
 RUN apt install -y libjemalloc2
 
 # tell java to use jemalloc
-ENV LD_PRELOAD=""
-RUN if [ "$TARGETARCH" = "amd64" ]; then \
-        export LD_PRELOAD="/usr/lib/x86_64-linux-gnu/libjemalloc.so.2"; \
-    elif [ "$TARGETARCH" = "arm64" ]; then \
-        export LD_PRELOAD="/usr/lib/aarch64-linux-gnu/libjemalloc.so.2"; \
-    fi && \
-    echo "Using jemalloc from: $LD_PRELOAD" && \
-    echo "LD_PRELOAD=$LD_PRELOAD" >> /etc/environment
-
-ENV LD_PRELOAD=${LD_PRELOAD}
+ENV LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libjemalloc.so.2
 
 # go back to container user
 USER container
