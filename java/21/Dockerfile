@@ -1,9 +1,11 @@
 FROM        --platform=$TARGETOS/$TARGETARCH ghcr.io/pterodactyl/yolks:java_21
 
+# temporarily elevate perms
+USER root
+
 # install jemalloc
 RUN apt install -y jemalloc
 
-USER root
 # tell java to use jemalloc
 ENV LD_PRELOAD=""
 RUN if [ "$TARGETARCH" = "amd64" ]; then \
@@ -16,4 +18,5 @@ RUN if [ "$TARGETARCH" = "amd64" ]; then \
 
 ENV LD_PRELOAD=${LD_PRELOAD}
 
+# go back to container user
 USER container
