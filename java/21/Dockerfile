@@ -3,6 +3,7 @@ FROM        --platform=$TARGETOS/$TARGETARCH ghcr.io/pterodactyl/yolks:java_21
 # install jemalloc
 RUN apt install -y jemalloc
 
+USER root
 # tell java to use jemalloc
 ENV LD_PRELOAD=""
 RUN if [ "$TARGETARCH" = "amd64" ]; then \
@@ -14,3 +15,5 @@ RUN if [ "$TARGETARCH" = "amd64" ]; then \
     echo "LD_PRELOAD=$LD_PRELOAD" >> /etc/environment
 
 ENV LD_PRELOAD=${LD_PRELOAD}
+
+USER container
