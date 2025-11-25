@@ -4,7 +4,7 @@ FROM        --platform=$TARGETOS/$TARGETARCH ghcr.io/pterodactyl/yolks:java_21
 USER root
 
 # install jemalloc
-RUN apt install -y libmimalloc3
+RUN apt install -y libmimalloc2.0
 
 # tell java to use jemalloc
 ENV LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libmimalloc.so
