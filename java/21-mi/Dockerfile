@@ -7,7 +7,7 @@ USER root
 RUN apt install -y libmimalloc2.0
 
 # tell java to use jemalloc
-ENV LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libmimalloc.so
+ENV LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libmimalloc.so.2
 
 # go back to container user
 USER container
